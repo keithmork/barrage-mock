@@ -1,0 +1,48 @@
+plugins {
+    // Apply the java Plugin to add support for Java.
+    id 'java'
+    id 'org.springframework.boot'
+    id 'io.spring.dependency-management'
+    id 'pl.allegro.tech.build.axion-release'
+}
+
+group = 'me.keithmo'
+version = scmVersion.version
+sourceCompatibility = '17'
+
+repositories {
+    // Use Maven Central for resolving dependencies.
+    mavenCentral()
+    maven { url 'https://repo.spring.io/release' }
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+dependencies {
+    // https://github.com/alibaba/spring-cloud-alibaba/wiki/%E7%89%88%E6%9C%AC%E8%AF%B4%E6%98%8E
+    implementation platform('com.alibaba.cloud:spring-cloud-alibaba-dependencies:2021.0.1.0')
+    implementation platform('org.springframework.cloud:spring-cloud-dependencies:2021.0.1')
+    implementation platform('org.springframework.boot:spring-boot-dependencies:2.6.3')
+
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    compileOnly 'org.projectlombok:lombok'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    runtimeOnly 'io.micrometer:micrometer-registry-prometheus'
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+testing {
+    suites {
+        // Configure the built-in test suite
+        test {
+            // Use JUnit Jupiter test framework
+            useJUnitJupiter('5.8.2')
+        }
+    }
+}

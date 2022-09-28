@@ -1,0 +1,46 @@
+server:
+  port: 10080
+  http2:
+    enabled: true
+
+spring:
+  application:
+    name: barrage-mock
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+        failure-tolerance-enabled: true
+  jackson:
+    default-property-inclusion: non_empty
+
+dubbo:
+  application:
+    name: ${spring.application.name}
+    logger: slf4j
+  metadata-report:
+    address: nacos://${spring.cloud.nacos.discovery.server-addr}
+  protocol:
+    name: dubbo
+    port: 10081
+  registry:
+    address: nacos://${spring.cloud.nacos.discovery.server-addr}
+  consumer:
+    check: false
+
+management:
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+mock:
+  response:
+    successRate: 100
+    time:
+      normal: 50
+      spike: 500
+      failed: 10

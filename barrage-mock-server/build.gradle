@@ -1,0 +1,15 @@
+plugins {
+    id 'barrage.mock.java-spring-conventions'
+}
+
+dependencies {
+    implementation project(':barrage-mock-api')
+
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery'
+
+    // https://mvnrepository.com/artifact/org.apache.dubbo/dubbo
+    implementation 'org.apache.dubbo:dubbo:2.7.17'
+    // implementation 'com.alibaba.nacos:nacos-client'
+}

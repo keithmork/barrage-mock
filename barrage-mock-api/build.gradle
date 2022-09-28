@@ -1,0 +1,3 @@
+plugins {
+    id 'barrage.mock.java-library-conventions'
+}
